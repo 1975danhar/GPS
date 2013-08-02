@@ -24,7 +24,10 @@ int main()
 		exit(-1);
 	}
 	sleep(5);
-	//pthread_join( thread1, NULL);
+	/*
+	   pthread_join( thread1, NULL);
+	 */
+
 	while(1){
 
 		system("clear");
