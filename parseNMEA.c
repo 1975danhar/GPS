@@ -7,8 +7,7 @@ static int getNext(int pos, char *line, char *dest)
 {
 	char *tmp = line+pos;
 	int iterator = 0;
-	while(*tmp != ',' && *tmp != '*' && *tmp != '\r')
-	{
+	while(*tmp != ',' && *tmp != '*' && *tmp != '\r'){
 		tmp++;
 		iterator++;
 	}
