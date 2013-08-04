@@ -9,67 +9,118 @@
 #include"parseNMEA.h"
 static char *getGpgga(char *retval, int i)
 {
-	GPGGA *gpgga;
+	GPGGA gpgga;
 	char line[100];
 	
-	gpgga = malloc(sizeof(GPGGA));
 	pthread_mutex_lock(&GPGGAMutex);
 	strcpy(line, GPGGA_LIST->string);
 	pthread_mutex_unlock(&GPGGAMutex);
-	parseNMEA(gpgga, line);
+	parseGPGGA(&gpgga, line);
 	switch (i){
 		case 0:
-			strcpy(retval, gpgga->MessageID);
+			strcpy(retval, gpgga.MessageID);
 			break;
 		case 1:
-			strcpy(retval, gpgga->UTCTime);
+			strcpy(retval, gpgga.UTCTime);
 			break;
 		case 2:
-			strcpy(retval, gpgga->Latitude);
+			strcpy(retval, gpgga.Latitude);
 			break;
 		case 3:
-			strcpy(retval, gpgga->NSIndicator);
+			strcpy(retval, gpgga.NSIndicator);
 			break;
 		case 4:
-			strcpy(retval, gpgga->Longitude);
+			strcpy(retval, gpgga.Longitude);
 			break;
 		case 5:
-			strcpy(retval, gpgga->EWIndicator);
+			strcpy(retval, gpgga.EWIndicator);
 			break;
 		case 6:
-			strcpy(retval, gpgga->PositionFixIndicator);
+			strcpy(retval, gpgga.PositionFixIndicator);
 			break;
 		case 7:
-			strcpy(retval, gpgga->SatellitesUsed);
+			strcpy(retval, gpgga.SatellitesUsed);
 			break;
 		case 8:
-			strcpy(retval, gpgga->HDOP);
+			strcpy(retval, gpgga.HDOP);
 			break;
 		case 9:
-			strcpy(retval, gpgga->MSLAltitude);
+			strcpy(retval, gpgga.MSLAltitude);
 			break;
 		case 10:
-			strcpy(retval, gpgga->MSLUnits);
+			strcpy(retval, gpgga.MSLUnits);
 			break;
 		case 11:
-			strcpy(retval, gpgga->GeoidSeparation);
+			strcpy(retval, gpgga.GeoidSeparation);
 			break;
 		case 12:
-			strcpy(retval, gpgga->GeoidUnits);
+			strcpy(retval, gpgga.GeoidUnits);
 			break;
 		case 13:
-			strcpy(retval, gpgga->AgeOfDiffCorr);
+			strcpy(retval, gpgga.AgeOfDiffCorr);
 			break;
 		case 14:
-			strcpy(retval, gpgga->DiffRefStationID);
+			strcpy(retval, gpgga.DiffRefStationID);
 			break;
 		case 15:
-			strcpy(retval, gpgga->Checksum);
+			strcpy(retval, gpgga.Checksum);
 			break;
 	}
-	free(gpgga);
 	return retval;
 }
+static char *getGprmc(char *retval, int i)
+{
+	GPRMC gprmc;
+	char line[100];
+	pthread_mutex_lock(&GPRMCMutex);
+	strcpy(line, GPRMC_LIST->string);
+	pthread_mutex_unlock(&GPRMCMutex);
+	parseGPRMC(&gprmc, line);
+	switch(i){
+		case 1:
+			strcpy(retval, gprmc.RMCMessageID);
+			break;
+		case 2:
+			strcpy(retval, gprmc.UTCPosition);
+			break;
+		case 3:
+			strcpy(retval, gprmc.Status );
+			break;
+		case 4:		
+			strcpy(retval, gprmc.RMCLatitude );
+			break;
+		case 5:
+			strcpy(retval, gprmc.RMCNSIndicator );
+			break;
+		case 6:
+			strcpy(retval, gprmc.RMCLongitude);
+			break;
+		case 7:
+			strcpy(retval, gprmc.RMCEWIndicator);
+			break;
+		case 8:
+			strcpy(retval, gprmc.SpeedOverGround);
+			break;
+		case 9:
+			strcpy(retval, gprmc.CourseOverGround);
+			break;
+		case 10:
+			strcpy(retval, gprmc.Date);
+			break;
+		case 11:
+			strcpy(retval, MagneticVariation);
+			break;
+		case 12:
+			strcpy(retval, RMCEWIndicator2);
+			break;
+		case 13:
+			strcpy(retval.Checksum);
+			break;
+	}
+	return retval;
+}
+
+// GPGGA
 char *getMessageID(char *retval){return getGpgga(retval, 0);}
 char *getUTCTime(char *retval){return getGpgga(retval, 1);}
 char *getLatitude(char *retval){return getGpgga(retval, 2);}
@@ -87,6 +138,8 @@ char *getAgeOfDiffCorr(char *retval){return getGpgga(retval, 13);}
 char *getDiffRefStation(char *retval){return getGpgga(retval, 14);}
 char *getChecksum(char *retval){return getGpgga(retval, 15);}
 
+// GPRMC
+char *get
 int BUinitGPS(int flags, int numberOfObjects)
 {
 	int pt;

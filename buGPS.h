@@ -18,4 +18,17 @@ char *getGeoidUnits(char *retval);
 char *getAgeOfDiffCorr(char *retval);
 char *getDiffRefStation(char *retval);
 char *getChecksum(char *retval);
+
+char *getRMCMe//------------------------------ (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
+char * (char *retval);
 #endif

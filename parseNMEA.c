@@ -13,10 +13,11 @@ static int getNext(int pos, char *line, char *dest)
 	}
 	tmp = line+pos;
 	strncpy(dest, tmp, iterator);
-	
+	dest[iterator] = '\0';	
 	return pos + iterator+1;
 }
-void parseNMEA(GPGGA *in, char *strToParse)
+
+void parseGPGGA(GPGGA *in, char *strToParse)
 {
 	int pos = 0;
 	pos = getNext(pos, strToParse, in->MessageID );
@@ -34,5 +35,22 @@ void parseNMEA(GPGGA *in, char *strToParse)
 	pos = getNext(pos, strToParse, in->GeoidUnits );
 	pos = getNext(pos, strToParse, in->AgeOfDiffCorr );
 	pos = getNext(pos, strToParse, in->DiffRefStationID );
+	getNext(pos, strToParse, in->Checksum );
+}
+void parseGPRMC(GPRMC *in, char *strToParse)
+{
+	int pos = 0;
+	pos = getNext(pos, strToParse, in->RMCMessageID );
+	pos = getNext(pos, strToParse, in->UTCPosition );
+	pos = getNext(pos, strToParse, in->Status );
+	pos = getNext(pos, strToParse, in->RMCLatitude );
+	pos = getNext(pos, strToParse, in->RMCNSIndicator );
+	pos = getNext(pos, strToParse, in->RMCLongitude );
+	pos = getNext(pos, strToParse, in->RMCEWIndicator );
+	pos = getNext(pos, strToParse, in->SpeedOverGround );
+	pos = getNext(pos, strToParse, in->CourseOverGround );
+	pos = getNext(pos, strToParse, in->Date );
+	pos = getNext(pos, strToParse, in->MagneticVariation );
+	pos = getNext(pos, strToParse, in->RMCEWIndicator );
 	getNext(pos, strToParse, in->Checksum );
 }

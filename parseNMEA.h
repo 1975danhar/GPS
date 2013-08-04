@@ -2,11 +2,23 @@
 #define PARSENMEA_H
 
 typedef struct GPGSA{
-	// ToDo: add struct members
+	// Todo: Add members
 } GPGSA;
 
 typedef struct GPRMC{
-	// ToDo: add struct members
+	char RMCMessageID[7];
+	char UTCPosition[11];
+	char Status[2];
+	char RMCLatitude[11];
+	char RMCNSIndicator[2];
+	char RMCLongitude[11];
+	char RMCEWIndicator[2];
+	char SpeedOverGround[8];
+	char CourseOverGround[6];
+	char Date[7];
+	char MagneticVariation[4];
+	char RMCEWIndicator2[2];
+	char Checksum[8];
 } GPRMC;
 
 typedef struct GPGGA{
@@ -29,8 +41,8 @@ typedef struct GPGGA{
 } GPGGA;
 
 typedef struct GPGSV{
-	// ToDo: add struct members
+	// ToDo: Add members
 } GPGSV;
 
-void parseNMEA(GPGGA *in,char *strToParse); 
+void parseGPGGA(GPGGA *in,char *strToParse); 
 #endif
