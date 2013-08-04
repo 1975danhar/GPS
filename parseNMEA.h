@@ -45,4 +45,5 @@ typedef struct GPGSV{
 } GPGSV;
 
 void parseGPGGA(GPGGA *in,char *strToParse); 
+void parseGPRMC(GPRMC *in,char *strToParse);
 #endif

@@ -108,13 +108,13 @@ static char *getGprmc(char *retval, int i)
 			strcpy(retval, gprmc.Date);
 			break;
 		case 11:
-			strcpy(retval, MagneticVariation);
+			strcpy(retval, gprmc.MagneticVariation);
 			break;
 		case 12:
-			strcpy(retval, RMCEWIndicator2);
+			strcpy(retval, gprmc.RMCEWIndicator2);
 			break;
 		case 13:
-			strcpy(retval.Checksum);
+			strcpy(retval, gprmc.Checksum);
 			break;
 	}
 	return retval;
@@ -139,7 +139,18 @@ char *getDiffRefStation(char *retval){return getGpgga(retval, 14);}
 char *getChecksum(char *retval){return getGpgga(retval, 15);}
 
 // GPRMC
-char *get
+char *getRMCMessageID(char *retval){return getGprmc(retval, 1);}
+char *getUTCPosition(char *retval){return getGprmc(retval, 2);}
+char *getStatus(char *retval){return getGprmc(retval, 3);}
+char *getRMCLatitude(char *retval){return getGprmc(retval, 4);}
+char *getRMCNSIndicator(char *retval){return getGprmc(retval, 5);}
+char *getRMCLongitude(char *retval){return getGprmc(retval, 6);}
+char *getRMCEWIndicator(char *retval){return getGprmc(retval, 7);}
+char *getSpeedOverGround(char *retval){return getGprmc(retval, 8);}
+char *getCourseOverGround(char *retval){return getGprmc(retval, 9);}
+char *getDate(char *retval){return getGprmc(retval, 10);}
+char *getMagneticVariation(char *retval){return getGprmc(retval, 11);}
+char *getRMCChecksum(char *retval){return getGprmc(retval, 12);}
 int BUinitGPS(int flags, int numberOfObjects)
 {
 	int pt;

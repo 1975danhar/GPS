@@ -16,6 +16,7 @@ int main()
 		printf("3. Latitude\n");
 		printf("4. Longitude\n");
 		printf("5. Number of satellites\n");
+		printf("6. Date\n");
 		scanf("%d", &choise);
 		switch ((int)choise){
 			case 1:
@@ -33,6 +34,8 @@ int main()
 			case 5:
 				printf("Number of satellites: %s\n", getSatellitesUsed(retval));
 				break;
+			case 6:
+				printf("Date: %s\n", getDate(retval));
 			default: 
 				break;
 		}
