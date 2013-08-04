@@ -56,6 +56,21 @@ void *readSerial()
 				GPGGA_LIST = pushItem(GPGGA_LIST, line);
 				pthread_mutex_unlock(&GPGGAMutex);
 			}
+			if(strstr(line, "$GPGSA")!=NULL){
+				pthread_mutex_lock(&GPGSAMutex);
+				GPGSA_LIST = pushItem(GPGSV_LIST, line);
+				pthread_mutex_unlock(&GPGSAMutex);
+			}
+			if(strstr(line, "$GPRMC")!=NULL){
+				pthread_mutex_lock(&GPGSAMutex);
+				GPGSA_LIST = pushItem(GPGSV_LIST, line);
+				pthread_mutex_unlock(&GPGSAMutex);
+			}
+			if(strstr(line, "$GPGSV")!=NULL){
+				pthread_mutex_lock(&GPGSAMutex);
+				GPGSA_LIST = pushItem(GPGSV_LIST, line);
+				pthread_mutex_unlock(&GPGSAMutex);
+			}
 		}
 	} 
  	close(fd);

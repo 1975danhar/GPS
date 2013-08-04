@@ -1,6 +1,14 @@
 #ifndef PARSENMEA_H
 #define PARSENMEA_H
 
+typedef struct GPGSA{
+	// ToDo: add struct members
+} GPGSA;
+
+typedef struct GPRMC{
+	// ToDo: add struct members
+} GPRMC;
+
 typedef struct GPGGA{
 	char MessageID[7];
 	char UTCTime[11];
@@ -19,6 +27,10 @@ typedef struct GPGGA{
 	char DiffRefStationID[5];
 	char Checksum[8];
 } GPGGA;
+
+typedef struct GPGSV{
+	// ToDo: add struct members
+} GPGSV;
 
 void parseNMEA(GPGGA *in,char *strToParse); 
 #endif
