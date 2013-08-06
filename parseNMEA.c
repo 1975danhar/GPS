@@ -5,9 +5,9 @@
 static char *getNext(char **line, char *dest)
 {
 	while(**line != ',' && **line != '*' && **line != '\r'){
-	*dest = **line;
-	dest++;
-	(*line)++;
+		*dest = **line;
+		dest++;
+		(*line)++;
 	}
 	*dest='\0';
 	(*line)++;
