@@ -2,55 +2,51 @@
 #include <string.h>
 #include <stdlib.h>
 #include "parseNMEA.h"
-
-static int getNext(int pos, char *line, char *dest)
+static char *getNext(char **line, char *dest)
 {
-	char *tmp = line+pos;
-	int iterator = 0;
-	while(*tmp != ',' && *tmp != '*' && *tmp != '\r'){
-		tmp++;
-		iterator++;
+	while(**line != ',' && **line != '*' && **line != '\r'){
+	*dest = **line;
+	dest++;
+	(*line)++;
 	}
-	tmp = line+pos;
-	strncpy(dest, tmp, iterator);
-	dest[iterator] = '\0';	
-	return pos + iterator+1;
+	*dest='\0';
+	(*line)++;
+	return *line;
 }
 
 void parseGPGGA(GPGGA *in, char *strToParse)
 {
-	int pos = 0;
-	pos = getNext(pos, strToParse, in->MessageID );
-	pos = getNext(pos, strToParse, in->UTCTime );
-	pos = getNext(pos, strToParse, in->Latitude );
-	pos = getNext(pos, strToParse, in->NSIndicator );
-	pos = getNext(pos, strToParse, in->Longitude );
-	pos = getNext(pos, strToParse, in->EWIndicator );
-	pos = getNext(pos, strToParse, in->PositionFixIndicator );
-	pos = getNext(pos, strToParse, in->SatellitesUsed );
-	pos = getNext(pos, strToParse, in->HDOP );
-	pos = getNext(pos, strToParse, in->MSLAltitude );
-	pos = getNext(pos, strToParse, in->MSLUnits );
-	pos = getNext(pos, strToParse, in->GeoidSeparation );
-	pos = getNext(pos, strToParse, in->GeoidUnits );
-	pos = getNext(pos, strToParse, in->AgeOfDiffCorr );
-	pos = getNext(pos, strToParse, in->DiffRefStationID );
-	getNext(pos, strToParse, in->Checksum );
+	strToParse = getNext(&strToParse, in->MessageID );
+	strToParse = getNext(&strToParse, in->UTCTime );
+	strToParse = getNext(&strToParse, in->Latitude );
+	strToParse = getNext(&strToParse, in->NSIndicator );
+	strToParse = getNext(&strToParse, in->Longitude );
+	strToParse = getNext(&strToParse, in->EWIndicator );
+	strToParse = getNext(&strToParse, in->PositionFixIndicator );
+	strToParse = getNext(&strToParse, in->SatellitesUsed );
+	strToParse = getNext(&strToParse, in->HDOP );
+	strToParse = getNext(&strToParse, in->MSLAltitude );
+	strToParse = getNext(&strToParse, in->MSLUnits );
+	strToParse = getNext(&strToParse, in->GeoidSeparation );
+	strToParse = getNext(&strToParse, in->GeoidUnits );
+	strToParse = getNext(&strToParse, in->AgeOfDiffCorr );
+	strToParse = getNext(&strToParse, in->DiffRefStationID );
+	getNext(&strToParse, in->Checksum );
 }
 void parseGPRMC(GPRMC *in, char *strToParse)
 {
-	int pos = 0;
-	pos = getNext(pos, strToParse, in->RMCMessageID );
-	pos = getNext(pos, strToParse, in->UTCPosition );
-	pos = getNext(pos, strToParse, in->Status );
-	pos = getNext(pos, strToParse, in->RMCLatitude );
-	pos = getNext(pos, strToParse, in->RMCNSIndicator );
-	pos = getNext(pos, strToParse, in->RMCLongitude );
-	pos = getNext(pos, strToParse, in->RMCEWIndicator );
-	pos = getNext(pos, strToParse, in->SpeedOverGround );
-	pos = getNext(pos, strToParse, in->CourseOverGround );
-	pos = getNext(pos, strToParse, in->Date );
-	pos = getNext(pos, strToParse, in->MagneticVariation );
-	pos = getNext(pos, strToParse, in->RMCEWIndicator );
-	getNext(pos, strToParse, in->Checksum );
+	strToParse = getNext(&strToParse, in->RMCMessageID );
+	strToParse = getNext(&strToParse, in->UTCPosition );
+	strToParse = getNext(&strToParse, in->Status );
+	strToParse = getNext(&strToParse, in->RMCLatitude );
+	strToParse = getNext(&strToParse, in->RMCNSIndicator );
+	strToParse = getNext(&strToParse, in->RMCLongitude );
+	strToParse = getNext(&strToParse, in->RMCEWIndicator );
+	strToParse = getNext(&strToParse, in->SpeedOverGround );
+	strToParse = getNext(&strToParse, in->CourseOverGround );
+	strToParse = getNext(&strToParse, in->Date );
+	strToParse = getNext(&strToParse, in->MagneticVariation );
+	strToParse = getNext(&strToParse, in->RMCEWIndicator );
+	getNext(&strToParse, in->Checksum );
 }
+
